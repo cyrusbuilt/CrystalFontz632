@@ -1,0 +1,67 @@
+#######################################
+# Syntax Coloring Map for CrystalFontz632
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+CrystalFontz632	KEYWORD1
+GraphIndex	KEYWORD1
+GraphStyle	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+end	KEYWORD2
+rebootDisplay	KEYWORD2
+clearDisplay	KEYWORD2
+enableBacklight	KEYWORD2
+disableBacklight	KEYWORD2
+isBacklightEnabled	KEYWORD2
+cursorHome	KEYWORD2
+hideDisplay	KEYWORD2
+restoreDisplay	KEYWORD2
+isDisplayHidden	KEYWORD2
+hideCursor	KEYWORD2
+showUnderlineCursor	KEYWORD2
+showBlockCursor	KEYWORD2
+showInvertingBlockCursor	KEYWORD2
+isCursorShown	KEYWORD2
+backspace	KEYWORD2
+lineFeed	KEYWORD2
+deleteInPlace	KEYWORD2
+formFeed	KEYWORD2
+carriageReturn	KEYWORD2
+setContrast	KEYWORD2
+getContrast	KEYWORD2
+setBrightness	KEYWORD2
+getBrightness	KEYWORD2
+setCursorPos	KEYWORD2
+setBarGraph	KEYWORD2
+scrollOn	KEYWORD2
+scrollOff	KEYWORD2
+isScrollOn	KEYWORD2
+wrapOn	KEYWORD2
+wrapOff	KEYWORD2
+isWrapOn	KEYWORD2
+showInfoScreen	KEYWORD2
+print	KEYWORD2
+crlf	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+GRAPH_INDEX1	LITERAL1
+GRAPH_INDEX2	LITERAL1
+GRAPH_INDEX3	LITERAL1
+GRAPH_INDEX4	LITERAL1
+GRAPH_STYLE_THICK	LITERAL1
+GRAPH_STYLE_INVISIBLE	LITERAL1
+GRAPH_STYLE_STRIPED	LITERAL1
+GRAPH_STYLE_MEDIUM_CENTER	LITERAL1
+GRAPH_STYLE_MEDIUM_LOW	LITERAL1
+GRAPH_STYLE_MEDIUM_HIGH	LITERAL1
