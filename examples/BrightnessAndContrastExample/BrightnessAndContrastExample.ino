@@ -41,5 +41,5 @@ void loop() {
 		lcd.setContrast(j);
 		delay(200);
 	}
-	lcd.setContrast(50);    // Return contrast to default.
+	lcd.setContrast(CF632_CONTRAST_DEFAULT);    // Return contrast to default.
 }

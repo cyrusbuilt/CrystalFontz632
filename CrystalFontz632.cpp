@@ -24,14 +24,20 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <SoftwareSerial.h>
 
 CrystalFontz632::CrystalFontz632(uint8_t txPin)
-	: _txPin(txPin), _backlightPin(0) {
+	: _txPin(txPin), _backlightPin(0), _blEnabled(false),
+	_hidden(false), _scroll(false), _wrap(false),
+	_cursorHidden(false), _contrast(CF632_CONTRAST_DEFAULT),
+	_brightness(CF632_BRIGHTNESS_DEFAULT) {
 	// Note: The display does not send any data back,
 	// so we don't need a receive pin (TX only).
 	this->_lcd = new SoftwareSerial(0, this->_txPin);
 }
 
 CrystalFontz632::CrystalFontz632(uint8_t txPin, uint8_t backlighPin)
-	: _txPin(txPin), _backlightPin(backlighPin) {
+	: _txPin(txPin), _backlightPin(backlighPin), _blEnabled(false),
+	_hidden(false), _scroll(false), _wrap(false),
+	_cursorHidden(false), _contrast(CF632_CONTRAST_DEFAULT),
+	_brightness(CF632_BRIGHTNESS_DEFAULT) {
 	this->_lcd = new SoftwareSerial(0, this->_txPin);
 }
 
@@ -56,10 +62,19 @@ void CrystalFontz632::sendCommand(byte cmd) {
 	this->_lcd->write(cmd);
 }
 
+void CrystalFontz632::sendCommand(const byte buffer[], size_t size) {
+	for (uint8_t i = 0; i < size; i++) {
+		this->sendCommand(buffer[i]);
+	}
+}
+
 void CrystalFontz632::rebootDisplay() {
 	// The manual indicates this command needs to be sent twice.
-	this->sendCommand((byte)CMD632_REBOOT);
-	this->sendCommand((byte)CMD632_REBOOT);
+	byte* buf = new byte[2];
+	buf[0] = (byte)CMD632_REBOOT;
+	buf[1] = (byte)CMD632_REBOOT;
+	this->sendCommand(buf, 2);
+	delete[] buf;
 	delay(500); // Give it time to reboot.
 }
 
@@ -79,8 +94,11 @@ void CrystalFontz632::enableBacklight() {
 		digitalWrite(this->_backlightPin, HIGH);
 	}
 	else {
-		this->sendCommand((byte)CMD632_CTRL_BACKLIGHT);
-		this->sendCommand((byte)CF632_BRIGHTNESS_MAX);
+		byte* buf = new byte[2];
+		buf[0] = (byte)CMD632_CTRL_BACKLIGHT;
+		buf[1] = (byte)CF632_BRIGHTNESS_MAX;
+		this->sendCommand(buf, 2);
+		delete[] buf;
 	}
 	this->_blEnabled = true;
 }
@@ -92,8 +110,11 @@ void CrystalFontz632::disableBacklight() {
 		digitalWrite(this->_backlightPin, LOW);
 	}
 	else {
-		this->sendCommand((byte)CMD632_CTRL_BACKLIGHT);
-		this->sendCommand((byte)CF632_BRIGHTNESS_MIN);
+		byte* buf = new byte[2];
+		buf[0] = (byte)CMD632_CTRL_BACKLIGHT;
+		buf[1] = (byte)CF632_BRIGHTNESS_MIN;
+		this->sendCommand(buf, 2);
+		delete[] buf;
 	}
 	this->_blEnabled = false;
 }
@@ -176,8 +197,11 @@ void CrystalFontz632::setContrast(uint8_t level) {
 		level  = CF632_CONTRAST_MAX;
 	}
 
-	this->sendCommand((byte)CMD632_CTRL_CONTRAST);
-	this->sendCommand((byte)level);
+	byte* buf = new byte[2];
+	buf[0] = (byte)CMD632_CTRL_CONTRAST;
+	buf[1] = (byte)level;
+	this->sendCommand(buf, 2);
+	delete[] buf;
 	this->_contrast = level;
 }
 
@@ -194,8 +218,11 @@ void CrystalFontz632::setBrightness(uint8_t level) {
 		level = CF632_BRIGHTNESS_MAX;
 	}
 
-	this->sendCommand((byte)CMD632_CTRL_BACKLIGHT);
-	this->sendCommand((byte)level);
+	byte* buf = new byte[2];
+	buf[0] = (byte)CMD632_CTRL_BACKLIGHT;
+	buf[1] = (byte)level;
+	this->sendCommand(buf, 2);
+	delete[] buf;
 	this->_brightness = level;
 }
 
@@ -220,9 +247,12 @@ void CrystalFontz632::setCursorPos(uint8_t column, uint8_t row) {
 		row = (CF632_ROWS - 1);
 	}
 
-	this->sendCommand((byte)CMD632_SET_CURSOR_POS);
-	this->sendCommand((byte)column);
-	this->sendCommand((byte)row);
+	byte* buf = new byte[3];
+	buf[0] = (byte)CMD632_SET_CURSOR_POS;
+	buf[1] = (byte)column;
+	buf[2] = (byte)row;
+	this->sendCommand(buf, 2);
+	delete[] buf;
 }
 
 void CrystalFontz632::setBarGraph(GraphIndex index, GraphStyle style, uint8_t startCol, uint8_t endCol, uint8_t len, uint8_t row) {
@@ -265,16 +295,44 @@ void CrystalFontz632::setBarGraph(GraphIndex index, GraphStyle style, uint8_t st
 	}
 
 	// Make sure start and end columns are valid. Also make sure the row is legit.
-	if ((startCol >= 0) && (startCol < CF632_COLUMNS) &&
-		(endCol > startCol) && (endCol < CF632_COLUMNS) &&
-		(row >= 0) && (row < CF632_ROWS)) {
-		this->sendCommand((byte)CMD632_HORIZ_BAR_GRAPH);
-		this->sendCommand(idx);
-		this->sendCommand(s);
-		this->sendCommand((byte)startCol);
-		this->sendCommand((byte)endCol);
-		this->sendCommand((byte)len);
-		this->sendCommand((byte)row);
+	if (startCol < 0) {
+		startCol = 0;
+	}
+
+	if (startCol > (CF632_COLUMNS - 1)) {
+		startCol = (CF632_COLUMNS - 1);
+	}
+
+	if (endCol < 0) {
+		endCol = 0;
+	}
+
+	if (endCol > (CF632_COLUMNS - 1)) {
+		endCol = (CF632_COLUMNS - 1);
+	}
+
+	if (row < 0) {
+		row = 0;
+	}
+
+	if (row > (CF632_ROWS - 1)) {
+		row = (CF632_ROWS - 1);
+	}
+
+	if (endCol > startCol) {
+		// Create the command buffer with all params.
+		byte* buf = new byte[7];
+		buf[0] = (byte)CMD632_HORIZ_BAR_GRAPH;
+		buf[1] = idx;
+		buf[2] = s;
+		buf[3] = (byte)startCol;
+		buf[4] = (byte)endCol;
+		buf[5] = (byte)len;
+		buf[6] = (byte)row;
+
+		// Send the command and destroy the buffer.
+		this->sendCommand(buf, 7);
+		delete[] buf;
 	}
 }
 
@@ -312,6 +370,10 @@ void CrystalFontz632::showInfoScreen() {
 
 void CrystalFontz632::print(char* message) {
 	this->_lcd->print(message);
+}
+
+void CrystalFontz632::print(uint8_t num) {
+	this->_lcd->print(num, DEC);
 }
 
 void CrystalFontz632::crlf() {

@@ -69,10 +69,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // Contrast limits
 #define CF632_CONTRAST_MIN 0
 #define CF632_CONTRAST_MAX 100
+#define CF632_CONTRAST_DEFAULT 50
 
 // Brightness limits
 #define CF632_BRIGHTNESS_MIN 0
 #define CF632_BRIGHTNESS_MAX 100
+#define CF632_BRIGHTNESS_DEFAULT CF632_BRIGHTNESS_MAX
 
 // Graph indices
 #define CF632_GRAPH_INDEX1 0

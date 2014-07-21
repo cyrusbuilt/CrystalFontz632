@@ -74,6 +74,15 @@ private:
      */
 	void sendCommand(byte cmd);
 
+    /**
+     * @brief sendCommand Sends commands to the LCD controller. This overload
+     * can be used to send multiple commands at a time, or a single command
+     * with one or more parameters.
+     * @param buffer The command buffer.
+     * @param size The size (length) of the buffer.
+     */
+    void sendCommand(const byte buffer[], size_t size);
+
 public:
     /**
      * @brief CrystalFontz632 Initializes a new instance of the CrystalFontz632
@@ -89,7 +98,7 @@ public:
      * class with the desired Arduino pin to use for serial TX and the desired
      * pin to use for controlling the backlight.
      * @param txPin The desired pin to use for serial TX.
-     * @param backlightPin
+     * @param backlightPin The desired pin to use to control the backlight.
      */
 	CrystalFontz632(uint8_t txPin, uint8_t backlightPin);
 
@@ -311,6 +320,12 @@ public:
      * @param message The text to print.
      */
     void print(char* message);
+
+    /**
+     * @brief print Prints a number to the display.
+     * @param num The number to print.
+     */
+    void print(uint8_t num);
 
     /**
      * @brief crlf Carriage return, line feed. This will move the
