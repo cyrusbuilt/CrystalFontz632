@@ -251,7 +251,7 @@ void CrystalFontz632::setCursorPos(uint8_t column, uint8_t row) {
 	buf[0] = (byte)CMD632_SET_CURSOR_POS;
 	buf[1] = (byte)column;
 	buf[2] = (byte)row;
-	this->sendCommand(buf, 2);
+	this->sendCommand(buf, 3);
 	delete[] buf;
 }
 
