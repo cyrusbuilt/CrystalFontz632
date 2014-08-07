@@ -9,6 +9,7 @@
 CrystalFontz632	KEYWORD1
 GraphIndex	KEYWORD1
 GraphStyle	KEYWORD1
+DisplayType	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)

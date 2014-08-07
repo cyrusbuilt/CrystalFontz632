@@ -48,6 +48,12 @@ typedef enum {
 	GRAPH_STYLE_MEDIUM_HIGH
 } GraphStyle;
 
+// Display types.
+typedef enum {
+	DT_SIXTEENBYTWO,
+	DT_TWENTYBYFOUR
+} DisplayType;
+
 /**
  * @brief The CrystalFontz632 class provides an API for manipulating a
  * CrystalFontz 632/634 serial LCD display. This API currently *only* works
@@ -66,6 +72,7 @@ private:
 	bool _cursorHidden;
 	uint8_t _contrast;
 	uint8_t _brightness;
+	DisplayType _type;
 	SoftwareSerial* _lcd;
 
     /**
@@ -111,6 +118,12 @@ public:
      * @brief begin Connect to the display and init.
      */
 	void begin();
+
+	/**
+	 * @brief begin Connect to the display and init.
+	 * @param dt Specifies the display type.
+	 */
+	void begin(DisplayType dt);
 
     /**
      * @brief end Disconnect from display.
@@ -187,7 +200,7 @@ public:
 
     /**
      * @brief showBlockCursor Shows a blinking block cursor at the current
-     * cusor positiion.
+     * cursor positiion.
      */
     void showBlockCursor();
 

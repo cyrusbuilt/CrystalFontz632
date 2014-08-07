@@ -24,10 +24,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // The following is the instruction set for the CrystalFontz 16x2 (632)
 // intelligent serial interface display. These commands are sent to the
 // display as bytes that represent ASCII codes. This instruction set is
-// also compatible with the 20x4 (634) display model as well, but the
-// size definitions (CF632_COLUMNS and CF632_ROWS) would have to be changed
-// to 20 and 4, respectively. Note: This command set is known to be compatible
-// with hardware v2.0 and firmware v2.0 (and probably higher).
+// also compatible with the 20x4 (634) display model as well. Note: This
+// command set is known to be compatible with hardware v2.0 and firmware
+// v2.0 (and probably higher).
 
 // CrystalFontz 632/634 command definitions
 #define CMD632_NULL 0                    // Null
@@ -61,10 +60,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define CMD632_SHOW_INFO 31              // Show the information screen
 
 // Display dimensions
-// NOTE: These *can* be modified to support screens of different dimensions
-// such as 20x4.
 #define CF632_COLUMNS 16                 // For a 16x2 display
 #define CF632_ROWS 2
+
+#define CF634_COLUMNS 20                 // For a 20x4 display
+#define CF634_ROWS 4
 
 // Contrast limits
 #define CF632_CONTRAST_MIN 0

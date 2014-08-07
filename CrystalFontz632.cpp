@@ -24,20 +24,32 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <SoftwareSerial.h>
 
 CrystalFontz632::CrystalFontz632(uint8_t txPin)
-	: _txPin(txPin), _backlightPin(0), _blEnabled(false),
-	_hidden(false), _scroll(false), _wrap(false),
-	_cursorHidden(false), _contrast(CF632_CONTRAST_DEFAULT),
-	_brightness(CF632_BRIGHTNESS_DEFAULT) {
+	: _txPin(txPin),
+	_backlightPin(0),
+	_blEnabled(false),
+	_hidden(false),
+	_scroll(false),
+	_wrap(false),
+	_cursorHidden(false),
+	_contrast(CF632_CONTRAST_DEFAULT),
+	_brightness(CF632_BRIGHTNESS_DEFAULT),
+	_type(DT_SIXTEENBYTWO) {
 	// Note: The display does not send any data back,
 	// so we don't need a receive pin (TX only).
 	this->_lcd = new SoftwareSerial(0, this->_txPin);
 }
 
 CrystalFontz632::CrystalFontz632(uint8_t txPin, uint8_t backlighPin)
-	: _txPin(txPin), _backlightPin(backlighPin), _blEnabled(false),
-	_hidden(false), _scroll(false), _wrap(false),
-	_cursorHidden(false), _contrast(CF632_CONTRAST_DEFAULT),
-	_brightness(CF632_BRIGHTNESS_DEFAULT) {
+	: _txPin(txPin),
+	_backlightPin(backlighPin),
+	_blEnabled(false),
+	_hidden(false),
+	_scroll(false),
+	_wrap(false),
+	_cursorHidden(false),
+	_contrast(CF632_CONTRAST_DEFAULT),
+	_brightness(CF632_BRIGHTNESS_DEFAULT),
+	_type(DT_SIXTEENBYTWO) {
 	this->_lcd = new SoftwareSerial(0, this->_txPin);
 }
 
@@ -52,6 +64,11 @@ void CrystalFontz632::begin() {
 		// User provided a backlight pin, so set it up.
 		pinMode(this->_backlightPin, OUTPUT);
 	}
+}
+
+void CrystalFontz632::begin(DisplayType dt) {
+	this->_type = dt;
+	this->begin();
 }
 
 void CrystalFontz632::end() {
@@ -235,16 +252,30 @@ void CrystalFontz632::setCursorPos(uint8_t column, uint8_t row) {
 		column = 0;
 	}
 
-	if (column > (CF632_COLUMNS - 1)) {
-		column = (CF632_COLUMNS - 1);
-	}
-
 	if (row < 0) {
 		row = 0;
 	}
 
-	if (row > (CF632_ROWS - 1)) {
-		row = (CF632_ROWS - 1);
+	// Adjust max dimensions according to display type.
+	switch (this->_type) {
+		case DT_SIXTEENBYTWO:
+			if (column > (CF632_COLUMNS - 1)) {
+				column = (CF632_COLUMNS - 1);
+			}
+
+			if (row > (CF632_ROWS - 1)) {
+				row = (CF632_ROWS -1);
+			}
+			break;
+		case DT_TWENTYBYFOUR:
+			if (column > (CF634_COLUMNS - 1)) {
+				column = (CF634_COLUMNS - 1);
+			}
+
+			if (row > (CF634_ROWS - 1)) {
+				row = (CF634_ROWS - 1);
+			}
+			break;
 	}
 
 	byte* buf = new byte[3];
@@ -299,24 +330,42 @@ void CrystalFontz632::setBarGraph(GraphIndex index, GraphStyle style, uint8_t st
 		startCol = 0;
 	}
 
-	if (startCol > (CF632_COLUMNS - 1)) {
-		startCol = (CF632_COLUMNS - 1);
-	}
-
 	if (endCol < 0) {
 		endCol = 0;
-	}
-
-	if (endCol > (CF632_COLUMNS - 1)) {
-		endCol = (CF632_COLUMNS - 1);
 	}
 
 	if (row < 0) {
 		row = 0;
 	}
 
-	if (row > (CF632_ROWS - 1)) {
-		row = (CF632_ROWS - 1);
+	// Adjust max dimensions according to display type.
+	switch (this->_type) {
+		case DT_SIXTEENBYTWO:
+			if (startCol > (CF632_COLUMNS - 1)) {
+				startCol = (CF632_COLUMNS - 1);
+			}
+
+			if (endCol > (CF632_COLUMNS - 1)) {
+				endCol = (CF632_COLUMNS - 1);
+			}
+
+			if (row > (CF632_ROWS - 1)) {
+				row = (CF632_ROWS - 1);
+			}
+			break;
+		case DT_TWENTYBYFOUR:
+			if (startCol > (CF634_COLUMNS - 1)) {
+				startCol = (CF634_COLUMNS - 1);
+			}
+
+			if (endCol > (CF634_COLUMNS - 1)) {
+				endCol = (CF634_COLUMNS - 1);
+			}
+
+			if (row > (CF634_ROWS - 1)) {
+				row = (CF634_ROWS - 1);
+			}
+			break;
 	}
 
 	if (endCol > startCol) {
