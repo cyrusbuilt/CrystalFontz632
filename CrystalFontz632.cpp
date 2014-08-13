@@ -105,6 +105,10 @@ void CrystalFontz632::clearDisplay() {
 }
 
 void CrystalFontz632::enableBacklight() {
+	if (this->_blEnabled) {
+		return;
+	}
+
 	// If user provided a backlight pin, then turn it on.
 	// Otherwise, just set the brighness all the way up.
 	if (this->_backlightPin > 0) {
@@ -121,6 +125,10 @@ void CrystalFontz632::enableBacklight() {
 }
 
 void CrystalFontz632::disableBacklight() {
+	if (!this->_blEnabled) {
+		return;
+	}
+
 	// If user provided a backlight pin, then turn it off.
 	// Otherwise, just set the brightness all the way down.
 	if (this->_backlightPin > 0) {
@@ -386,11 +394,17 @@ void CrystalFontz632::setBarGraph(GraphIndex index, GraphStyle style, uint8_t st
 }
 
 void CrystalFontz632::scrollOn() {
+	if (this->_scroll) {
+		return;
+	}
 	this->sendCommand((byte)CMD632_SCROLL_ON);
 	this->_scroll = true;
 }
 
 void CrystalFontz632::scrollOff() {
+	if (!this->_scroll) {
+		return;
+	}
 	this->sendCommand((byte)CMD632_SCROLL_OFF);
 	this->_scroll = false;
 }
@@ -400,11 +414,17 @@ bool CrystalFontz632::isScrollOn() {
 }
 
 void CrystalFontz632::wrapOn() {
+	if (this->_wrap) {
+		return;
+	}
 	this->sendCommand((byte)CMD632_WRAP_ON);
 	this->_wrap = true;
 }
 
 void CrystalFontz632::wrapOff() {
+	if (!this->_wrap) {
+		return;
+	}
 	this->sendCommand((byte)CMD632_WRAP_OFF);
 	this->_wrap = false;
 }
