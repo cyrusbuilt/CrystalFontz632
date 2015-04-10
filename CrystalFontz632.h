@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define CrystalFontz632_h
 
 #include <Arduino.h>
+#include <WString.h>
 
 // The serial BAUD rate to connect to the display at. This value should
 // correspond with the DIP settings on the back of the display.
@@ -333,6 +334,13 @@ public:
      * @param message The text to print.
      */
     void print(char* message);
+
+    /**
+     * @brief print Prints text from flash memory to the display.
+     * @param fmsg A string stored in flash memory (instead of program memory)
+     * using the F() macro.
+     */
+    void print(const __FlashStringHelper *fmsg);
 
     /**
      * @brief print Prints a number to the display.

@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <CrystalFontz632.h>
 #include <CF632Commands.h>
 #include <SoftwareSerial.h>
+#include <WString.h>
 
 CrystalFontz632::CrystalFontz632(uint8_t txPin)
 	: _txPin(txPin),
@@ -439,6 +440,10 @@ void CrystalFontz632::showInfoScreen() {
 
 void CrystalFontz632::print(char* message) {
 	this->_lcd->print(message);
+}
+
+void CrystalFontz632::print(const __FlashStringHelper *fmsg) {
+	this->_lcd->print(fmsg);
 }
 
 void CrystalFontz632::print(uint8_t num) {
