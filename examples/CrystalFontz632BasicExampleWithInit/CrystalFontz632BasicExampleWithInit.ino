@@ -7,7 +7,7 @@ prior to executing this sketch.
 */
 
 #include <Arduino.h>
-#include <softwareSerial.h>     // This MUST be included before CrystalFontz632
+#include <SoftwareSerial.h>     // This MUST be included before CrystalFontz632
 #include <CrystalFontz632.h>
 
 #define TX_PIN 3
@@ -21,7 +21,7 @@ void setup() {
 	lcd.clearDisplay();               // Clear the screen
 	lcd.enableBacklight();            // Turn the backlight on
 	lcd.cursorHome();                 // Send the cursor to the top left corner (0, 0)
-	lcd.print("What's up");           
+	lcd.print("What's up");
 	lcd.crlf();                       // Carriage return, line feed. Send cursor to first column of next line.
 	lcd.print("jive turkey!!!");
 	lcd.hideCursor();                 // Turn off blinking cursor

@@ -5,7 +5,7 @@ For best results, power-cycle the controller prior to executing this sketch.
 */
 
 #include <Arduino.h>
-#include <SofwareSerial.h>     // This MUST be included before CrystalFontz632
+#include <SoftwareSerial.h>     // This MUST be included before CrystalFontz632
 #include <CrystalFontz632.h>
 
 #define TX_PIN 3
