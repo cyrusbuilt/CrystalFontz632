@@ -1,5 +1,6 @@
 ==========================================================================
-CrystalFontz632 :: Serial LCD library for Arduino/Wiring
+# CrystalFontz632 :: Serial LCD library for Arduino/Wiring
+[![Build Status](https://travis-ci.org/cyrusbuilt/CrystalFontz632.svg?branch=master)](https://travis-ci.org/cyrusbuilt/CrystalFontz632)
 ==========================================================================
 
 ## LICENSE
@@ -32,22 +33,23 @@ Copy the entire folder containing this library to the "libraries" folder
 of your Arduino installation. Then include both SoftwareSerial.h and
 CrystalFontz632.h in your sketch.  See example below:
 
-    #include <Arduino.h>
-    #include <SoftwareSerial.h>   // Need to include this so the linker will succeed
-    #include <CrystalFontz632.>
+```cpp
+#include <Arduino.h>
+#include <SoftwareSerial.h>   // Need to include this so the linker will succeed
+#include <CrystalFontz632.>
 
-    #define TX_PIN 3
-    #define BACKLIGHT 4
+#define TX_PIN 3
+#define BACKLIGHT 4
 
-    CrystalFontz632 lcd(TX_PIN, BACKLIGHT);  // Create library instance.
+CrystalFontz632 lcd(TX_PIN, BACKLIGHT);  // Create library instance.
 
-    void setup() {
-    	lcd.begin();                 // Connect to display.
-    	lcd.clearDisplay();          // Clear the display of any contents.
-    	lcd.print("Hello, World!");  // Print line of text on top line starting at left-most column.
-    }
+void setup() {
+  lcd.begin();                 // Connect to display.
+  lcd.clearDisplay();          // Clear the display of any contents.
+  lcd.print("Hello, World!");  // Print line of text on top line starting at left-most column.
+}
 
-    void loop() {
-    	delay(100);
-    }
-
+void loop() {
+  delay(100);
+}
+```

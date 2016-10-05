@@ -1,0 +1,27 @@
+{
+  "name": "CrystalFontz632",
+  "repository": {
+    "url": "https://github.com/cyrusbuilt/CrystalFontz632.git",
+    "type": "git"
+  },
+  "platforms": [
+    "arduino"
+  ],
+  "version": "1.0.0",
+  "authors": [
+    {
+      "url": "http://cyrusbuilt.net/",
+      "maintainer": true,
+      "email": "cyrusbuilt@gmail.com",
+      "name": "Cyrus Brunner"
+    }
+  ],
+  "keywords": [
+    "LCD",
+    "serial",
+    "display",
+    "CrystalFontz"
+  ],
+  "id": null,
+  "description": "A library providing a driver for CrystalFontz 63x-series intelligent serial LCD displays."
+}
