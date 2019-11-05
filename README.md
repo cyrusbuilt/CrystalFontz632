@@ -1,7 +1,6 @@
-==========================================================================
 # CrystalFontz632 :: Serial LCD library for Arduino/Wiring
 [![Build Status](https://travis-ci.org/cyrusbuilt/CrystalFontz632.svg?branch=master)](https://travis-ci.org/cyrusbuilt/CrystalFontz632)
-==========================================================================
+
 
 ## LICENSE
 
@@ -61,4 +60,4 @@ If you are using PlatformIO (http://platformio.org/), you can simply run the fol
 platformio lib install crystalfontz632
 ```
 
-Otherwise, download the zip from https://github.com/cyrusbuilt/ArduinoHAF/archive/master.zip then extract its contents to a folder called "ArduinoHAF" and then move that folder to your libraries folder.
+Otherwise, download the zip from https://github.com/cyrusbuilt/CrystalFontz632/archive/master.zip then extract its contents to a folder called "CrystalFontz632" and then move that folder to your libraries folder.
