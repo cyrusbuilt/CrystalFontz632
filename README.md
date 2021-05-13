@@ -53,6 +53,10 @@ void loop() {
 }
 ```
 
+## Hardware Changes
+
+There are solder pad jumpers on the back of the device.  You need to close jumpers JPB (RS-232 data inverted) and JPE (DATA_IN is 0v to 5v swing).
+
 ## How to install
 
 If you are using PlatformIO (http://platformio.org/), you can simply run the following command:
