@@ -1,7 +1,6 @@
 # CrystalFontz632 :: Serial LCD library for Arduino/Wiring
 [![Build Status](https://travis-ci.org/cyrusbuilt/CrystalFontz632.svg?branch=master)](https://travis-ci.org/cyrusbuilt/CrystalFontz632)
 
-
 ## LICENSE
 
 Licensed under GPL v2 (the "License"); you may not use this library except
@@ -17,14 +16,22 @@ limitations under the License.
 
 ## Description
 
-This is a library that provides a robust API for manipulating one or more
-CrystalFontz 632 (16x2) intelligent serial LCD displays. This is a
+This is a library that provides a robust driver API for manipulating one or
+more CrystalFontz 632 (16x2) intelligent serial LCD displays. This is a
 multi-instance library, so can control multiple displays, as it uses the
 SoftwareSerial library to communicate with the display. Only one pin is
 required to control the display, so you can designate a digital I/O as
 the data pin and one pin to control the backlight.  Alternately, if you
 intend to leave the backlight always on, just tie the backlight pin to
 +5V DC.
+
+## Features
+- Supports all known supported RS-232 BAUD rates.
+- Supports 16x2 and 20x4 models.
+- Supports both 1x and 2x firmware versions.
+- Supports graphs.
+- Supports backlight control.
+- NEW: Now supports CGROM characters.
 
 ## How to use
 
@@ -53,6 +60,9 @@ void loop() {
 }
 ```
 
+## NOTE
+Currently, this library doesn't support connecting the display via SPI despite the display supporting both RS-232 and SPI.  Although, I am planning to support SPI in the future.
+
 ## How to install
 
 If you are using PlatformIO (http://platformio.org/), you can simply run the following command:
@@ -61,3 +71,7 @@ platformio lib install crystalfontz632
 ```
 
 Otherwise, download the zip from https://github.com/cyrusbuilt/CrystalFontz632/archive/master.zip then extract its contents to a folder called "CrystalFontz632" and then move that folder to your libraries folder.
+
+## Customization
+
+If you need to save space and do not need CGROM support, you can comment or undefine the USE_CGROM_CHARS define. If you want CGROM support but have a display with 1x firmware, you can change the default firmware version by setting the DISPLAY_632_VERSION define to DISPLAY_632_VERSION_1X. (NOTE: The display firmware version affects what CGROM characters are supported. See "Appendix C" in 632full.pdf). This will likely become a settable parameter in the library in the future.

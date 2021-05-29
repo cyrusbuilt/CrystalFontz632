@@ -72,6 +72,11 @@ void CrystalFontz632::begin(DisplayType dt) {
 	this->begin();
 }
 
+void CrystalFontz632::begin(DisplayType dt, DisplayBaudRate baud) {
+	this->_lcd->begin((int)baud);
+	this->begin(dt);
+}
+
 void CrystalFontz632::end() {
 	this->_lcd->end();
 }
@@ -453,6 +458,12 @@ void CrystalFontz632::print(const __FlashStringHelper *fmsg) {
 void CrystalFontz632::print(uint8_t num) {
 	this->_lcd->print(num, DEC);
 }
+
+#ifdef USE_CGROM_CHARS
+void CrystalFontz632::printCgRomChar(CGRomChar chr) {
+	this->_lcd->write((byte)chr);
+}
+#endif
 
 void CrystalFontz632::crlf() {
 	this->carriageReturn();
