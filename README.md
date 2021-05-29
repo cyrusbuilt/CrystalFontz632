@@ -75,3 +75,7 @@ Otherwise, download the zip from https://github.com/cyrusbuilt/CrystalFontz632/a
 ## Customization
 
 If you need to save space and do not need CGROM support, you can comment or undefine the USE_CGROM_CHARS define. If you want CGROM support but have a display with 1x firmware, you can change the default firmware version by setting the DISPLAY_632_VERSION define to DISPLAY_632_VERSION_1X. (NOTE: The display firmware version affects what CGROM characters are supported. See "Appendix C" in 632full.pdf). This will likely become a settable parameter in the library in the future.
+
+## Hardware Changes
+
+There are solder pad jumpers on the back of the device.  You may need to close jumpers JPB (RS-232 data inverted) and JPE (DATA_IN is 0v to 5v swing) if you experience noise. (See "Crystalfontz Intelligent Serial Display Jumper Settings" in 632full.pdf)
