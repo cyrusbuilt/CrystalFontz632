@@ -10,6 +10,7 @@ CrystalFontz632	KEYWORD1
 GraphIndex	KEYWORD1
 GraphStyle	KEYWORD1
 DisplayType	KEYWORD1
+CGRomChar	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -50,6 +51,7 @@ wrapOff	KEYWORD2
 isWrapOn	KEYWORD2
 showInfoScreen	KEYWORD2
 print	KEYWORD2
+printCgRomChar	KEYWORD2
 crlf	KEYWORD2
 
 #######################################
