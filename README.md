@@ -1,5 +1,5 @@
 # CrystalFontz632 :: Serial LCD library for Arduino/Wiring
-[![Build Status](https://travis-ci.org/cyrusbuilt/CrystalFontz632.svg?branch=master)](https://travis-ci.org/cyrusbuilt/CrystalFontz632)
+![Build Status](https://github.com/cyrusbuilt/CrystalFontz632/actions/workflows/ci.yml/badge.svg)
 
 ## LICENSE
 
