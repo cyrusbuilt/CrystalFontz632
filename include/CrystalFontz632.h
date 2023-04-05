@@ -22,14 +22,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define CrystalFontz632_h
 
 #include <Arduino.h>
-#include <WString.h>
 
 #define USE_CGROM_CHARS  // Comment to disable CGROM Character code support.
 
 #ifdef USE_CGROM_CHARS
 // Define appropriate display version.
-// TODO Maybe make this an enum value we pass to begin() to support multiple display types on
-// the same controller.
 #define DISPLAY_632_VERSION_1X 1
 #define DISPLAY_632_VERSION_2X 2
 #define DISPLAY_632_VERSION DISPLAY_632_VERSION_2X
