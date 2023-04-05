@@ -5,14 +5,37 @@
   "authors": [
     {
       "name": "Cyrus Brunner",
-      "email": "cyrusbuilt@gmail.com"
+      "email": "cyrusbuilt@gmail.com",
+      "maintainer": true
     }
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/cyrusbuilt/CrystalFontz632.git"
   },
-  "version": "1.0.2",
+  "version": "1.0.3",
   "frameworks": "arduino",
-  "platforms": "*"
+  "platforms": "*",
+  "examples": [
+    {
+      "name": "BrightnessAndContrastExample",
+      "base": "examples/BrightnessAndContrastExample",
+      "files": ["BrightnessAndContrastExample.ino"]
+    },
+    {
+      "name": "CGROMExample",
+      "base": "examples/CGROMExample",
+      "files": ["CGROMExample.ino"]
+    },
+    {
+      "name": "CrystalFontz632BasicExample",
+      "base": "examples/CrystalFontz632BasicExample",
+      "files": ["CrystalFontz632BasicExample.ino"]
+    },
+    {
+      "name": "CrystalFontz632BasicExampleWithInit",
+      "base": "examples/CrystalFontz632BasicExampleWithInit",
+      "files": ["CrystalFontz632BasicExampleWithInit.ino"]
+    }
+  ]
 }

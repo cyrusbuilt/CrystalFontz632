@@ -1,5 +1,5 @@
 # CrystalFontz632 :: Serial LCD library for Arduino/Wiring
-![Build Status](https://github.com/cyrusbuilt/CrystalFontz632/actions/workflows/ci.yml/badge.svg)
+[![Build Status](https://github.com/cyrusbuilt/CrystalFontz632/actions/workflows/ci.yml/badge.svg)](https://github.com/cyrusbuilt/CrystalFontz632/actions?query=workflow%3APlatformIO)
 
 ## LICENSE
 

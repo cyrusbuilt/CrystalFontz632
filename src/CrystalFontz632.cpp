@@ -18,11 +18,9 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <Arduino.h>
-#include <CrystalFontz632.h>
-#include <CF632Commands.h>
+#include "CrystalFontz632.h"
+#include "CF632Commands.h"
 #include <SoftwareSerial.h>
-#include <WString.h>
 
 CrystalFontz632::CrystalFontz632(uint8_t txPin)
 	: _txPin(txPin),

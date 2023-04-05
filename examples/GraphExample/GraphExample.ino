@@ -7,7 +7,7 @@ power cycle the display prior to executing this sketch.
 
 #include <Arduino.h>
 #include <SoftwareSerial.h>     // This MUST be included before CrystalFontz632
-#include <CrystalFontz632.h>
+#include "CrystalFontz632.h"
 
 #define TX_PIN 3
 #define BACKLIGHT_PIN 7
